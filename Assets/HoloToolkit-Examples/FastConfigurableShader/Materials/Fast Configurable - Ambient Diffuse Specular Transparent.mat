@@ -7,10 +7,10 @@ Material:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: Fast Configurable - Ambient Diffuse Specular Transparent
-  m_Shader: {fileID: 4800000, guid: f1f3948b20c230044bda31b620ddd37f, type: 3}
+  m_Shader: {fileID: 10750, guid: 0000000000000000f000000000000000, type: 0}
   m_ShaderKeywords: ETC1_EXTERNAL_ALPHA _EMISSION _ForcePerPixel _MAINTEX_OFFSET_ON
-    _MAINTEX_SCALE_ON _MainTex_ON _MainTex_SCALE_ON _SPECULARHIGHLIGHTS_ON _USEAMBIENT_ON
-    _USEDIFFUSE_ON _USEMAINCOLOR_ON _USEMAINTEX_ON _USESPECULAR_ON
+    _MAINTEX_SCALE_ON _MainTex_ON _SPECULARHIGHLIGHTS_ON _USEAMBIENT_ON _USEDIFFUSE_ON
+    _USEMAINCOLOR_ON _USEMAINTEX_ON _USESPECULAR_ON
   m_LightmapFlags: 1
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -95,7 +95,7 @@ Material:
     - _MainTex_OFFSET: 0
     - _MainTex_SCALE: 1
     - _Metallic: 0
-    - _Mode: 3
+    - _Mode: 2
     - _OcclusionStrength: 1
     - _Parallax: 0.02
     - _ReflectionScale: 2
@@ -136,7 +136,7 @@ Material:
     - _RimColor: {r: 1, g: 1, b: 1, a: 1}
     - _SpecColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
     - _SpecularColor: {r: 1, g: 1, b: 1, a: 1}
-    - _TextureScaleOffset: {r: 5, g: 5, b: 0, a: 0}
+    - _TextureScaleOffset: {r: 1, g: 1, b: 0, a: 0}
     - _Vec: {r: 0, g: 0, b: 0, a: 0}
     - _Vec2: {r: 0, g: 0, b: 0, a: 0}
     - _Vec3: {r: 0, g: 0, b: 0, a: 0}

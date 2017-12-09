@@ -7,11 +7,12 @@ Material:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: Fast Configurable - Unlit
-  m_Shader: {fileID: 4800000, guid: f1f3948b20c230044bda31b620ddd37f, type: 3}
-  m_ShaderKeywords: _EMISSION _MAINTEX_OFFSET_ON _MAINTEX_SCALE_ON _MainTex_ON _MainTex_SCALE_ON
-    _NORMALMAP _USEEMISSIONTEX_ON
+  m_Shader: {fileID: 10750, guid: 0000000000000000f000000000000000, type: 0}
+  m_ShaderKeywords: ETC1_EXTERNAL_ALPHA _EMISSION _MAINTEX_OFFSET_ON _MAINTEX_SCALE_ON
+    _MainTex_ON _MainTex_SCALE_ON _NORMALMAP _USEEMISSIONTEX_ON
   m_LightmapFlags: 1
   m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
   stringTagMap: {}
   disabledShaderPasses: []
