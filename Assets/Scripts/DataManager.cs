@@ -54,10 +54,15 @@ public class DataManager
         {
             case SliceType.Axial:
                 result.x = _sizeX;
+                result.y = _sizeY;
                 break;
             case SliceType.Coronal:
+                result.x = _sizeX;
+                result.y = _sizeZ;
                 break;
             case SliceType.Sagittal:
+                result.x = _sizeY;
+                result.y = _sizeZ;
                 break;
         }
         return result;
@@ -73,9 +78,15 @@ public class DataManager
                 else
                     return _axialTextures[sliceNum];
             case SliceType.Coronal:
-                return _coronalTextures[sliceNum];
+                if (reversed)
+                    return _coronalTexturesReversed[sliceNum];
+                else
+                    return _coronalTextures[sliceNum];
             case SliceType.Sagittal:
-                return _sagittalTextures[sliceNum];
+                if (reversed)
+                    return _sagittalTexturesReversed[sliceNum];
+                else
+                    return _sagittalTextures[sliceNum];
         }
 
         return _axialTextures[sliceNum];
@@ -123,11 +134,13 @@ public class DataManager
         for (int y = 0; y < _sizeY; y++)
         {
             _coronalTextures.Insert(y, ConstructSlice(y, SliceType.Coronal));
+            _coronalTexturesReversed.Insert(y, ConstructSlice(y, SliceType.Coronal, true));
         }
 
         for (int x = 0; x < _sizeX; x++)
         {
             _sagittalTextures.Insert(x, ConstructSlice(x, SliceType.Sagittal));
+            _sagittalTexturesReversed.Insert(x, ConstructSlice(x, SliceType.Sagittal, true));
         }
     }
 
@@ -176,8 +189,14 @@ public class DataManager
                 tempTexture = new Texture2D(_sizeX, _sizeZ, TextureFormat.ARGB32, false);
                 index = 0;
                 for (z = 0; z < _sizeZ; z++) // Reverse the z direction to change the facing
-                    for (x = 0; x < _sizeX; x++)
+                {
+                    for (int looper = 0; looper < _sizeX; looper++)
                     {
+                        if (reversed)
+                            x = _sizeX - looper - 1;
+                        else
+                            x = looper;
+
                         temp = _data[z, sliceNum, x];
                         if (temp == 0)
                             imageData[index] = 0;
@@ -191,6 +210,7 @@ public class DataManager
                             index++;
                         }
                     }
+                }
 
                 tempTexture.LoadRawTextureData(imageData);
                 tempTexture.Apply();
@@ -200,8 +220,13 @@ public class DataManager
                 tempTexture = new Texture2D(_sizeY, _sizeZ, TextureFormat.ARGB32, false);
                 index = 0;
                 for (z = 0; z < _sizeZ; z++) // Reverse the z direction to change the facing
-                    for (y = _sizeY - 1; y >= 0 ; y--)
+                    for (int looper = 0; looper < _sizeY; looper++)
                     {
+                        if (reversed)
+                            y = looper;
+                        else
+                            y = _sizeY - looper - 1;
+
                         temp = _data[z, y, sliceNum];
                         if (temp == 0)
                             imageData[index] = 0;

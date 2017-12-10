@@ -6,40 +6,42 @@ public class SliceManagerScript : MonoBehaviour {
 
     public SpriteRenderer forwardSlice;
     public SpriteRenderer backwardSlice;
-    public SpriteRenderer coronalSlice;
-    public SpriteRenderer sagittalSlice;
+    public SliceType sliceType;
 
     DataManager _dataManager;
-    int _axialSliceNum, _coronalSliceNum, _sagittalSliceNum;
+    int _sliceNumber;
+    Vector3 _offsetBase;
 
 	// Use this for initialization
 	void Start ()
     {
         _dataManager = DataManager.Instance;
-        _axialSliceNum = 0;
-        _coronalSliceNum = 0;
-        _sagittalSliceNum = 0;
+        _sliceNumber = 0;
+        _offsetBase = new Vector3();
+        switch(sliceType)
+        {
+            case SliceType.Axial:
+                _offsetBase = new Vector3(0, 1, 0);
+                break;
+            case SliceType.Coronal:
+                _offsetBase = new Vector3(0, 0, 1);
+                break;
+            case SliceType.Sagittal:
+                _offsetBase = new Vector3(1, 0, 0);
+                break;
+        }
+
 	}
 	
 	// Update is called once per frame
 	void Update ()
     {
-        _axialSliceNum = (_axialSliceNum + 1) % 181;
-        _coronalSliceNum = (_coronalSliceNum + 1) % 217;
-        _sagittalSliceNum = (_sagittalSliceNum + 1) % 181;
+        _sliceNumber = (_sliceNumber + 1) % _dataManager.GetNumSlices(sliceType);
 
-        Sprite temp1 = Sprite.Create(_dataManager.GetSlice(_axialSliceNum, SliceType.Axial), new Rect(0,0,181,217), new Vector2(0.5f,0.5f));
+        Sprite temp1 = Sprite.Create(_dataManager.GetSlice(_sliceNumber, sliceType), new Rect(0,0,_dataManager.GetSliceSize(sliceType).x, _dataManager.GetSliceSize(sliceType).y), new Vector2(0.5f,0.5f));
         forwardSlice.sprite = temp1;
-        forwardSlice.transform.localPosition = new Vector3(0, 0.01f * (float)(_axialSliceNum - 90), 0);
-        Sprite temp2 = Sprite.Create(_dataManager.GetSlice(_axialSliceNum, SliceType.Axial, true), new Rect(0, 0, 181, 217), new Vector2(0.5f, 0.5f));
+        forwardSlice.transform.localPosition = _offsetBase * 0.01f * (float)(_sliceNumber - _dataManager.GetNumSlices(sliceType)/2);
+        Sprite temp2 = Sprite.Create(_dataManager.GetSlice(_sliceNumber, sliceType, true), new Rect(0, 0, _dataManager.GetSliceSize(sliceType).x, _dataManager.GetSliceSize(sliceType).y), new Vector2(0.5f, 0.5f));
         backwardSlice.sprite = temp2;
-
-        Sprite temp3 = Sprite.Create(_dataManager.GetSlice(_coronalSliceNum, SliceType.Coronal), new Rect(0, 0, 181, 181), new Vector2(0.5f, 0.5f));
-        coronalSlice.sprite = temp3;
-        coronalSlice.transform.localPosition = new Vector3(0, 0, 0.01f * (float)(_coronalSliceNum - 108));
-
-        Sprite temp4 = Sprite.Create(_dataManager.GetSlice(_sagittalSliceNum, SliceType.Sagittal), new Rect(0, 0, 217, 181), new Vector2(0.5f, 0.5f));
-        sagittalSlice.sprite = temp4;
-        sagittalSlice.transform.localPosition = new Vector3(0.01f * (float)(_sagittalSliceNum - 90), 0, 0);
     }
 }
