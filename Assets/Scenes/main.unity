@@ -137,7 +137,7 @@ Transform:
   m_GameObject: {fileID: 8415832}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0.5}
-  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
+  m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
   m_Children:
   - {fileID: 130014474}
   - {fileID: 316488184}
@@ -455,6 +455,7 @@ MonoBehaviour:
   forwardSlice: {fileID: 130014473}
   backwardSlice: {fileID: 2063901946}
   sliceType: 0
+  cutoff: 0.5
 --- !u!1 &211372184
 GameObject:
   m_ObjectHideFlags: 0
@@ -655,6 +656,7 @@ MonoBehaviour:
   forwardSlice: {fileID: 316488185}
   backwardSlice: {fileID: 554030326}
   sliceType: 1
+  cutoff: 0.5
 --- !u!1001 &418699928
 Prefab:
   m_ObjectHideFlags: 0
@@ -1039,6 +1041,7 @@ MonoBehaviour:
   forwardSlice: {fileID: 968449115}
   backwardSlice: {fileID: 1228200426}
   sliceType: 2
+  cutoff: 0.5
 --- !u!4 &973256925 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4587520633816736, guid: d29bc40b7f3df26479d6a0aac211c355,
@@ -1345,16 +1348,6 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4541142303025740, guid: d29bc40b7f3df26479d6a0aac211c355, type: 2}
       propertyPath: m_RootOrder
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 20770519707920992, guid: d29bc40b7f3df26479d6a0aac211c355,
-        type: 2}
-      propertyPath: m_ClearFlags
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 114244653559405336, guid: d29bc40b7f3df26479d6a0aac211c355,
-        type: 2}
-      propertyPath: FadeSharedMaterial
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

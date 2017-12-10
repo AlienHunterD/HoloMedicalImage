@@ -98,7 +98,7 @@ namespace HoloToolkit.Unity
                 {
                     if (sourceState.Source.Id.Equals(interactionSource.id))
                     {
-                        returnValue = sourceState.Source.Controller.TryGetRenderableModelAsync();
+                        returnValue = null;//sourceState.Source.Controller.TryGetRenderableModelAsync();
                     }
                 }
             }, true);

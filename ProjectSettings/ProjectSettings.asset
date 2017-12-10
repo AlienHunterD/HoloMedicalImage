@@ -528,11 +528,11 @@ PlayerSettings:
   m_MobileRenderingPath: 1
   metroPackageName: HoloMedicalImage
   metroPackageVersion: 
-  metroCertificatePath: 
+  metroCertificatePath: E:\GitHub\HoloMedicalImage\Assets\WSATestCertificate.pfx
   metroCertificatePassword: 
-  metroCertificateSubject: 
-  metroCertificateIssuer: 
-  metroCertificateNotAfter: 0000000000000000
+  metroCertificateSubject: DefaultCompany
+  metroCertificateIssuer: DefaultCompany
+  metroCertificateNotAfter: 0062a50a6e90d401
   metroApplicationDescription: HoloMedicalImage
   wsaImages: {}
   metroTileShortName: 

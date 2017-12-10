@@ -734,7 +734,7 @@ MonoBehaviour:
   CameraClearFlags_OpaqueDisplay: 2
   BackgroundColor_OpaqueDisplay: {r: 0, g: 0, b: 0, a: 1}
   OpaqueQualityLevel: 5
-  NearClipPlane_TransparentDisplay: 0.85
+  NearClipPlane_TransparentDisplay: 0.35
   CameraClearFlags_TransparentDisplay: 2
   BackgroundColor_TransparentDisplay: {r: 0, g: 0, b: 0, a: 0}
   HoloLensQualityLevel: 0
