@@ -132,7 +132,7 @@ public class DataManager
             temp = 255 - _minWindow;
         }
 
-        if(temp != _minWindow)
+        if(temp != _windowWidth)
         { 
             _windowWidth = temp;
             UpdateTransferFunction();
