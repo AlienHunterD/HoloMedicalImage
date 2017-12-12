@@ -19,8 +19,9 @@ public class DataManager
     List<Texture2D> _sagittalTexturesReversed;
     byte[,,] _data;
     int _sizeX = 181, _sizeY = 217, _sizeZ = 181;
-
-
+    int _minWindow, _windowWidth;
+    int[] _transferFunction;
+    
     public static DataManager Instance
     {
         get
@@ -70,7 +71,12 @@ public class DataManager
 
     public Texture2D GetSlice(int sliceNum, SliceType sliceType, bool reversed = false)
     {
-        switch(sliceType)
+        if (_minWindow != 0 || _windowWidth != 255)
+        {
+            return ConstructSlice(sliceNum, sliceType, reversed);
+        }
+
+        switch (sliceType)
         {
             case SliceType.Axial:
                 if (reversed)
@@ -92,24 +98,102 @@ public class DataManager
         return _axialTextures[sliceNum];
     }
 
+    public bool MoveWindow(int delta)
+    {
+        int temp = _minWindow + delta;
+
+        if (temp < 0)
+        {
+            temp = 0;
+        }
+        else if (temp + _windowWidth > 255)
+        {
+            temp = 255 - _windowWidth;
+        }
+
+        if(temp != _minWindow)
+        { 
+            _minWindow = temp;
+            UpdateTransferFunction();
+            return true;
+        }
+        return false;
+    }
+
+    public bool SizeWindow(int delta)
+    {
+        int temp = _windowWidth + delta;
+        if (temp < 8)
+        {
+            temp = 8;
+        }
+        else if (temp + _minWindow > 255)
+        {
+            temp = 255 - _minWindow;
+        }
+
+        if(temp != _minWindow)
+        { 
+            _windowWidth = temp;
+            UpdateTransferFunction();
+            return true;
+        }
+
+        return false;
+    }
+    
+    private void UpdateTransferFunction()
+    {
+        float scale = 255f / (float)_windowWidth;
+        for (int i = 0; i < 256; i++)
+        {
+            if (i <= _minWindow || i > _minWindow + _windowWidth)
+            {
+                _transferFunction[i] = 0;
+            }
+            else if(i == _minWindow + _minWindow)
+            {
+                _transferFunction[i] = 255;
+            }
+            else
+            {
+                _transferFunction[i] = (int)Mathf.Clamp(scale*(i-_minWindow), 0, 255);
+            }
+        }
+    }
 
     private DataManager()
     {
         _emptyTexture = new Texture2D(1, 1);
         _emptyTexture.SetPixel(0, 0, Color.clear);
         _emptyTexture.Apply();
-
-        Reset();
-    }
-
-    private void Reset()
-    {
         _axialTextures = new List<Texture2D>();
         _axialTexturesReversed = new List<Texture2D>();
         _coronalTextures = new List<Texture2D>();
         _coronalTexturesReversed = new List<Texture2D>();
         _sagittalTextures = new List<Texture2D>();
         _sagittalTexturesReversed = new List<Texture2D>();
+        _transferFunction = new int[256];
+        Reset();
+    }
+
+    private void Reset()
+    {
+        _axialTextures.Clear();
+        _axialTexturesReversed.Clear();
+        _coronalTextures.Clear();
+        _coronalTexturesReversed.Clear();
+        _sagittalTextures.Clear();
+        _sagittalTexturesReversed.Clear();
+        _minWindow = 100;
+        _windowWidth = 255;
+
+        for (int i = 0; i < 256; i++)
+        {
+            _transferFunction[i] = i;
+        }
+        Debug.Log("In Reset!");
+        UpdateTransferFunction();
 
         _data = new byte[181, 217, 181];
 
@@ -167,7 +251,7 @@ public class DataManager
                             x = looper;
 
                         temp = _data[sliceNum, y, x];
-                        if (temp == 0)
+                        if (_transferFunction[temp] == 0)
                             imageData[index] = 0;
                         else
                             imageData[index] = 255;
@@ -175,7 +259,7 @@ public class DataManager
 
                         for (int i = 0; i < 3; i++)
                         {
-                            imageData[index] = temp;
+                            imageData[index] = (byte)_transferFunction[temp];
                             index++;
                         }
                     }
@@ -198,7 +282,7 @@ public class DataManager
                             x = looper;
 
                         temp = _data[z, sliceNum, x];
-                        if (temp == 0)
+                        if (_transferFunction[temp] == 0)
                             imageData[index] = 0;
                         else
                             imageData[index] = 255;
@@ -206,7 +290,7 @@ public class DataManager
 
                         for (int i = 0; i < 3; i++)
                         {
-                            imageData[index] = temp;
+                            imageData[index] = (byte)_transferFunction[temp];
                             index++;
                         }
                     }
@@ -228,7 +312,7 @@ public class DataManager
                             y = _sizeY - looper - 1;
 
                         temp = _data[z, y, sliceNum];
-                        if (temp == 0)
+                        if (_transferFunction[temp] == 0)
                             imageData[index] = 0;
                         else
                             imageData[index] = 255;
@@ -236,7 +320,7 @@ public class DataManager
 
                         for (int i = 0; i < 3; i++)
                         {
-                            imageData[index] = temp;
+                            imageData[index] = (byte)_transferFunction[temp];
                             index++;
                         }
                     }

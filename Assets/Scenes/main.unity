@@ -122,6 +122,7 @@ GameObject:
   - component: {fileID: 8415833}
   - component: {fileID: 8415836}
   - component: {fileID: 8415835}
+  - component: {fileID: 8415834}
   m_Layer: 0
   m_Name: SliceHolder
   m_TagString: Untagged
@@ -145,6 +146,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8415834
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 8415832}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 631742c9fbb96c541b6cd1695125a80d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slices:
+  - {fileID: 130014475}
+  - {fileID: 316488186}
+  - {fileID: 968449116}
 --- !u!114 &8415835
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -455,7 +471,6 @@ MonoBehaviour:
   forwardSlice: {fileID: 130014473}
   backwardSlice: {fileID: 2063901946}
   sliceType: 0
-  cutoff: 0.5
 --- !u!1 &211372184
 GameObject:
   m_ObjectHideFlags: 0
@@ -656,7 +671,6 @@ MonoBehaviour:
   forwardSlice: {fileID: 316488185}
   backwardSlice: {fileID: 554030326}
   sliceType: 1
-  cutoff: 0.5
 --- !u!1001 &418699928
 Prefab:
   m_ObjectHideFlags: 0
@@ -1041,7 +1055,6 @@ MonoBehaviour:
   forwardSlice: {fileID: 968449115}
   backwardSlice: {fileID: 1228200426}
   sliceType: 2
-  cutoff: 0.5
 --- !u!4 &973256925 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4587520633816736, guid: d29bc40b7f3df26479d6a0aac211c355,
